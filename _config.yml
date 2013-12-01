@@ -1,0 +1,6 @@
+auto: true
+
+markdown: rdiscount
+pygments: true
+permalink: /:title
+title: clinx.blog
