@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-    <ul >
+    <ul>
         {% for post in site.categories.blog %}
             <li>
                 <h2>
