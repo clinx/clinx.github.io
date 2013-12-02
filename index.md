@@ -1,10 +1,10 @@
 ---
 layout: default
 ---
-    <ul>
-        {% for post in site.categories.blog %}
-            <li>
-                <h2>
+<ul>
+    {% for post in site.categories.blog %}
+        <li>
+            <h2>
                     <a href="{{ post.url }}">{{ post.title }}</a>
                 </h2>
                 <div >{{ post.description }}</div>
