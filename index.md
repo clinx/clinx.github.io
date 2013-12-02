@@ -10,4 +10,4 @@ layout: default
                 <div >{{ post.description }}</div>
             </li>
         {% endfor %}
-    </ul>
+    </ul> 
