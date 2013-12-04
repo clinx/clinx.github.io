@@ -4,6 +4,7 @@ title: js setTimeout认清API
 category: blog
 description: setTimeout用的时候请主要第一个参数，是函数对象，不是字符串。
 ---
+
 ##凡事把先看自己的原因。
 
 加了好多群，经常看见有人问setTimeout出错，唉。亲先看懂API[setTimeout][1] 。如果没看错第一个参数
