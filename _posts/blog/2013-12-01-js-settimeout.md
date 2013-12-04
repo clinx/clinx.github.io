@@ -6,7 +6,7 @@ description: setTimeout用的时候请主要第一个参数，是函数对象，
 ---
 ##凡事把先看自己的原因。
 
-加了好多群，经常看见有人问setTimeout出错，唉。亲先看懂APIsetTimeout。如果没看错第一个参数
+加了好多群，经常看见有人问setTimeout出错，唉。亲先看懂API[setTimeout][].如果没看错第一个参数
 setTimeout(function,milliseconds,lang) 是 function。
     
     定义一个方法：
@@ -52,4 +52,4 @@ setTimeout(function,milliseconds,lang) 是 function。
         } 
     }
 
-
+[1]: http://www.w3schools.com/jsref/met_win_settimeout.asp
