@@ -35,22 +35,21 @@ setTimeout(function,milliseconds,lang) 是 function。
 
 为了解决执行完就结束，想必大家都各自的解决方案。但一般实现是以让整个应用的代码处于一个循环当中。
 
-比如这样：以下是我YY的想的通的实现形式。
-
-while(1){
-    if(anyStatusChange){  //任何改变。就是其他进程|线程对js单线程状态改变 （windows 
-                          //API捕获用户行为进程，由操作系统建立管道，改变js进程状态）
-      var  queue = [主流程回调queue,event回调queue,setTimeout回调queue,Ajax回调queue等];//2微数组
-      js主线程重复处理。模块
-      for(i=0;i < queue.length;i++){
-         var currentQueue = queue[i];
-         for(j=0;j < currentQueue.length, j++){
-            执行回调//回调的就是js的一级对象function.
-         }
-      }
-    }else{
-        sleep or wait to be aware.睡眠等待被唤醒。
-    } 
-}
+比如这样(以下是我YY的想的通的实现形式)：
+    while(1){
+        if(anyStatusChange){  //任何改变。就是其他进程|线程对js单线程状态改变 （windows 
+                              //API捕获用户行为进程，由操作系统建立管道，改变js进程状态）
+          var  queue = [主流程回调queue,event回调queue,setTimeout回调queue,Ajax回调queue等];//2微数组
+          js主线程重复处理。模块
+          for(i=0;i < queue.length;i++){
+             var currentQueue = queue[i];
+             for(j=0;j < currentQueue.length, j++){
+                执行回调//回调的就是js的一级对象function.
+             }
+          }
+        }else{
+            sleep or wait to be aware.睡眠等待被唤醒。
+        } 
+    }
 
 [1]: http://www.w3schools.com/jsref/met_win_settimeout.asp
