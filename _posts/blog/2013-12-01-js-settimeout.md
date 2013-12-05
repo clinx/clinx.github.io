@@ -1,8 +1,8 @@
 ---
 layout: post
 title: js setTimeout认清API
-category: blog
 description: setTimeout用的时候请主要第一个参数，是函数对象，不是字符串。
+category: blog
 ---
 
 ##凡事把先看自己的原因。
