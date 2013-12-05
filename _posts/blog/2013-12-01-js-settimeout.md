@@ -6,7 +6,6 @@ description: setTimeout用的时候请主要第一个参数，是函数对象，
 ---
 ##凡事把先看自己的原因。
 
-[setTimeout][setTimeout]
 加了好多群，经常看见有人问setTimeout出错，唉。亲先看懂API.如果没看错第一个参数
 setTimeout(function,milliseconds,lang) 是 function。
     
@@ -52,5 +51,6 @@ setTimeout(function,milliseconds,lang) 是 function。
             sleep or wait to be aware.睡眠等待被唤醒。
         } 
     }
+- 豆瓣链接：[《打造Facebook》][Facebook]
 
-[setTimeout]: http://www.w3schools.com/jsref/met_win_settimeout.asp
+[Facebook]: http://book.douban.com/subject/20471120/ "打造Facebook"
