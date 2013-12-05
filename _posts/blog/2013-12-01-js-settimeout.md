@@ -54,7 +54,7 @@ setTimeout(function,milliseconds,lang) 是 function。
     }
 
 根据上面的代码现在来实现一下setTimeout,该怎么做到让其可以等待呢。
-<pre>
+<pre><code>
    全熟假设,就当进行流程控制的一种想法：
    当程序调用setTimeout的时候。
    主程序记录下2个状态，和push一个方法回调。
@@ -76,6 +76,7 @@ setTimeout(function,milliseconds,lang) 是 function。
          }
       }
    }
+</code>
 </pre>
 这样实现的话也能解释为什么js alert("block")阻塞，会影响delay的time和下面语句执行的输出<br/>
    1386253640566 - 1386253639811 < 1000.
