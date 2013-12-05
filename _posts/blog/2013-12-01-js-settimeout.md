@@ -64,19 +64,20 @@ setTimeout(function,milliseconds,lang) 是 function。
    setTimeoutItem.delayTime = secondeArg;
    setTimeoutItem.callBack = (function(){return callMethod;})();
    queue[setTimeout回调queue].push(setTimeoutItem);
-
-   然后是主流程对其的处理：//回调的就是js的一级对象function.
-   var len = queue[setTimeout回调queue].length;
-   if(len !==0 ){
-      var currentTime = +new Date();
-      for(i=0; i < len;i++){
-         var currentSetTimeout = queue[setTimeout回调queue] [i];
-         if(currentSetTimeout.delayTime+setTimeoutItem.startRecodeTime < currentTime){
-            currentSetTimeout.callBack();
-         }
-      }
-   }
 </pre>
+
+    然后是主流程对其的处理：//回调的就是js的一级对象function.
+    var len = queue[setTimeout回调queue].length;
+    if(len !==0 ){
+       var currentTime = +new Date();
+       for(i=0; i < len;i++){
+          var currentSetTimeout = queue[setTimeout回调queue] [i];
+          if(currentSetTimeout.delayTime+setTimeoutItem.startRecodeTime < currentTime){
+             currentSetTimeout.callBack();
+          }
+       }
+    }
+
 这样实现的话也能解释为什么js alert("block")阻塞，会影响delay的time和下面语句执行的输出<br/>
    1386253640566 - 1386253639811 < 1000.
 <pre>
