@@ -36,7 +36,6 @@ setTimeout(function,milliseconds,lang) 是 function。
 
 为了解决执行完就结束，想必大家都各自的解决方案。但一般实现是以让整个应用的代码处于一个循环当中。
 
-   <pre>
     比如这样(以下是我YY的想的通的实现形式): 
     while(1){
         if(anyStatusChange){  //任何改变。就是其他进程|线程对js单线程状态改变 （windows 
@@ -53,4 +52,3 @@ setTimeout(function,milliseconds,lang) 是 function。
             sleep or wait to be aware.睡眠等待被唤醒。
         } 
     }
-   </pre>
