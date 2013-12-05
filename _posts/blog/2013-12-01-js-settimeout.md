@@ -7,9 +7,9 @@ description: setTimeout用的时候请主要第一个参数，是函数对象，
 
 ##凡事把先看自己的原因。
 
-加了好多群，经常看见有人问setTimeout出错，唉。亲先看懂API[setTimeout](http://www.w3schools.com/jsref/met_win_settimeout.asp).如果没看错第一个参数
+加了好多群，经常看见有人问setTimeout出错，唉。亲先看懂API.如果没看错第一个参数
 setTimeout(function,milliseconds,lang) 是 function。
-    
+    <pre>
     定义一个方法：
     var i = 0;d
     var callMethod = function(){
@@ -29,7 +29,7 @@ setTimeout(function,milliseconds,lang) 是 function。
         setTimeout(callMethod,1000); //注意这个参数是一个Function object.相当于C或C++中的函数指针，C#的委托。
         console.log(i);
         输出0，然后setTimeoutMetod。
-
+  </pre>
 很显然想要的结果是 输出0，然后setTimeoutMetod。为什么是0，然后是setTimeout.好厉害，js不是说的单线程处理么。
 单线程不是就一个单行道，干嘛会先输出0，然后输出setTimeout.
 单线程的如果一条到跑完不就结束了，为什么当我们点击页面控件的时候，js处理线程还是在执行。
