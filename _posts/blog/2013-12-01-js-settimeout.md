@@ -52,4 +52,4 @@ setTimeout(function,milliseconds,lang) 是 function。
         } 
     }
     
-[setTimeout]:   http://github.com "setTimeout"
+[setTimeout]: http://www.w3schools.com/jsref/met_win_settimeout.asp "setTimeout"
