@@ -76,17 +76,6 @@ setTimeout(function,milliseconds,lang) 是 function。
        }
     }
 
-这样实现的话也能解释为什么js alert("block")阻塞，会影响delay的time和下面语句执行的输出
-
-    1386253640566 - 1386253639811 < 1000.
-    setTimeout(function(){
-             console.log(+new Date());//1386253640566
-    }, 1000);
-    var fibo = function(n){
-         return n>1?fibo(n-1)+fibo(n-2):1; 
-    }
-    console.log(fibo(25));//121393
-    console.log(+new Date());//1386253639811
 
 
 
