@@ -66,6 +66,16 @@ setTimeout(function,milliseconds,lang) 是 function。
     setTimeoutItem.delayTime = secondeArg;
     setTimeoutItem.callBack = (function(){return callMethod;})();
     queue[setTimeout回调queue].push(setTimeoutItem);
-
+    然后是主流程对其的处理：//回调的就是js的一级对象function.
+    var len = queue[setTimeout回调queue].length;
+    if(len !==0 ){
+       var currentTime = +new Date();
+       for(i=0; i < len;i++){
+         var currentSetTimeout = queue[setTimeout回调queue][i];
+          if(currentSetTimeout.delayTime+setTimeoutItem.startRecodeTime < currentTime){
+             currentSetTimeout.callBack();
+          }
+       }
+    }
 
 [1]: http://www.w3schools.com/jsref/met_win_settimeout.asp
