@@ -71,16 +71,16 @@ setTimeout(function,milliseconds,lang) 是 function。
     if(len !==0 ){
        var currentTime = +new Date();
        for(i=0; i < len;i++){
-          var currentSetTimeout = queue[setTimeout回调queue] [i];
+          var currentSetTimeout = queue[setTimeout回调queue][i];
           if(currentSetTimeout.delayTime+setTimeoutItem.startRecodeTime < currentTime){
              currentSetTimeout.callBack();
           }
        }
     }
 
-这样实现的话也能解释为什么js alert("block")阻塞，会影响delay的time和下面语句执行的输出<br/>
-   1386253640566 - 1386253639811 < 1000.
+这样实现的话也能解释为什么js alert("block")阻塞，会影响delay的time和下面语句执行的输出
 
+    1386253640566 - 1386253639811 < 1000.
     setTimeout(function(){
              console.log(+new Date());//1386253640566
     }, 1000);
