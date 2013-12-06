@@ -70,7 +70,6 @@ setTimeout(function,milliseconds,lang) 是 function。
     if(len !==0 ){
        var currentTime = +new Date();
        for(i=0; i < len;i++){
-
           if(currentSetTimeout.delayTime+setTimeoutItem.startRecodeTime < currentTime){
              currentSetTimeout.callBack();
           }
@@ -91,10 +90,5 @@ setTimeout(function,milliseconds,lang) 是 function。
 
 
 
-###最后给上Refernces:
-- [Events and timing in-depth][TIMING]
-- [timing-and-synchronization][SYNC]
 
-[TIMING]: http://javascript.info/tutorial/events-and-timing-depth
-[SYNC]: http://dev.opera.com/articles/view/timing-and-synchronization-in-javascript/
 [1]: http://www.w3schools.com/jsref/met_win_settimeout.asp
