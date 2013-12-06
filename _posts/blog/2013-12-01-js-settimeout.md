@@ -53,28 +53,7 @@ setTimeout(function,milliseconds,lang) 是 function。
         } 
     }
 
-根据上面的代码现在来实现一下setTimeout,该怎么做到让其可以等待呢。
 
-    全熟假设,就当进行流程控制的一种想法：
-    当程序调用setTimeout的时候。
-    主程序记录下2个状态，和push一个方法回调。
-    生成一个对象进行相互绑定。
-    var setTimeoutItem = {};
-    setTimeoutItem.startRecodeTime = +new Date();
-    setTimeoutItem.delayTime = secondeArg;
-    setTimeoutItem.callBack = (function(){return callMethod;})();
-
-
-    然后是主流程对其的处理：//回调的就是js的一级对象function.
-    var len = queue[setTimeout回调queue].length;
-    if(len !==0 ){
-       var currentTime = +new Date();
-       for(i=0; i < len;i++){
-          if(currentSetTimeout.delayTime+setTimeoutItem.startRecodeTime < currentTime){
-             currentSetTimeout.callBack();
-          }
-       }
-    }
 
 
 
