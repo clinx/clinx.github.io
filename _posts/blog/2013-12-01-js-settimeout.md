@@ -62,7 +62,7 @@ setTimeout(function,milliseconds,lang) 是 function。
     主程序记录下2个状态，和push一个方法回调。
     生成一个对象进行相互绑定。
     var setTimeoutItem = {};
-    setTimeoutItem.startRecodeTime = +new Date();
+  
 
 
 
