@@ -64,7 +64,7 @@ setTimeout(function,milliseconds,lang) 是 function。
     var setTimeoutItem = {};
     setTimeoutItem.startRecodeTime = (+new Date());
     setTimeoutItem.delayTime = secondeArg;
-
+    `setTimeoutItem.callBack = (function(){return callMethod;})();`
 
 
 [1]: http://www.w3schools.com/jsref/met_win_settimeout.asp
