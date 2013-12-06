@@ -64,7 +64,6 @@ setTimeout(function,milliseconds,lang) 是 function。
     var setTimeoutItem = {};
     setTimeoutItem.startRecodeTime = (+new Date());
     setTimeoutItem.delayTime = secondeArg;
-    setTimeoutItem.callBack = (function(){return callMethod;})();
 
 
 
