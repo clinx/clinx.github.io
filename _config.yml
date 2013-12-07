@@ -1,8 +1,7 @@
 auto: true
 
-markdown: rdiscount
+markdown: maruku
 pygments: true
-paginate: 8
 permalink: /:title
 
 title: clinx.blog
