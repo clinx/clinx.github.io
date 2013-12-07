@@ -14,8 +14,9 @@ Jquery全世界都在用，没有理由不学习一下。开个玩笑，逗你�
     $(htmlDomelement),$('<tag>'),$('tagName'),$(function(){}),$("input:radio",parentDom),
     $(),$($()),$('tag',overrideProperties);
     
-可以看到多少是为了构造一个Jquery工厂包装的dom对象。得到dom对象的参数特点是遵循CSS
-选择器
+可以看到多半是为了构造一个Jquery工厂包装的dom对象。得到dom对象的参数特点是遵循CSS选择器
+比如div, classname, identification等token进行组合使用。 而有一些自定义有比较常用的规则
+比如odd,visiable像这样的$('li:odd'),$('div:visiable')就模仿CSS伪类一样定义。
 
     
 [1]: http://www.cnblogs.com/aaronjs/category/511281.html
