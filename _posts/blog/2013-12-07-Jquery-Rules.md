@@ -91,4 +91,7 @@ jQuery.event.dispatch.apply( eventHandle.elem, arguments )
 父元素的句柄被执行，还是通过浏览器的冒泡机制。所以可以通过 event.preventDefault();  event.stopPropagation();在那一
 个节点阻止冒泡过程。
 
+（4.）一个JS 框架一般都一个异步编程管理对象，Jquery.callback.基本实现就是把一组function按照用户的想法窜连起来。然后
+调用的时候，按照Jquery.callback工厂封装的有序组合按需执行。
+
 [1]: http://www.cnblogs.com/aaronjs/category/511281.html
