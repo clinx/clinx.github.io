@@ -54,8 +54,22 @@ DOM对象，大家都知道原生的对象如果要对一下属性的增该，�
 是web发展了一定时间才发现需要，用户需要跟流量器进行客服端的交互行为，这才有了内存结构DOM结构书供JS调用的接口。
 所以需要一个中间管理对象负责连接JS和DOM之间的操作，但又要保证良好的性能尽量少直接操作DOM.而有些对象可以不直
 接和DOM绑定所以Jquery帮我们实现了数据事件缓存的机制，让我们不用自己去关心浏览器内存泄漏的一些问题。
-
-
+缓存的实现是在dom节点上加一个全局唯一标识符 $('element').expando = data.uid;这个UID是全局唯一的，如果当前元素已经
+有了这个属性就取这个值，如果没有就从Jquery全局属性Data.uid中取得。想这样
+    var data = {1:ele1data,
+                2:ele2data,
+                3:ele3data};  //jquery中统一管理的数据的对象
+    var cache = {'key' : 'vaule'};先创建cache data
+    //跟dom元素节点绑定
+    var node =  $('element');
+    if(!!node.expando){
+        data[node.expando]=override(cache，data[node.expando]); //override重写已有cachedata.
+    }else{
+        node.expando = Data.uid //全局属性
+        node[Data.uid] = cache;
+        Data.uid++;
+    }
+而事件回调的绑定也才不多有一个专门做桥接的东西精选管理控制，让dom，和对应的事件的回调函数绑定。
 
 
 [1]: http://www.cnblogs.com/aaronjs/category/511281.html
