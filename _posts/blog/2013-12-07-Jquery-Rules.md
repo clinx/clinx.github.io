@@ -69,7 +69,26 @@ DOM对象，大家都知道原生的对象如果要对一下属性的增该，�
         node[Data.uid] = cache;
         Data.uid++;
     }
-而事件回调的绑定也才不多有一个专门做桥接的东西精选管理控制，让dom，和对应的事件的回调函数绑定。
-
+而事件回调的绑定也有一个专门做桥接的东西精选管理控制，让dom在jquery中缓存的事件名，和对应的
+data缓存的回调句柄进行绑定。（分解事件名与句柄）。而事件底层基本是通过addEventListener去绑定时间处理，
+因为如果你不这样做的话是<span style="color:red;">无法获取当前点击对象的</span>。<br/>
+流量器默认事件触发的入口是通过addEventListener的handler进行的，所以流量器默认行为的事件需要对handler
+封装，而Jquery自定义事件是Jquery封装代码流程手动触发的。这个也可一共用handler处理。所以绑定的时候
+需要封装好handler，而handler保留一个对当前对象缓存.而handler只着一件是就把处理丢给这个方法
+jQuery.event.dispatch.apply( eventHandle.elem, arguments )
+   1).  获取数据缓存
+   2).  创建编号
+   3).  分解事件名与句柄
+   4).  填充事件名与事件句柄
+执行的时候通过jQuery.event.fix进行浏览起兼容处理，他的目的是添加一些Jquery制定义的钩子（加状态机）属性和修正不同
+浏览器的event属性。
+事件完了就该是与handler的绑定了，绑定是由于节点可能有委托属性selector，就要考虑当前节点的执行顺序，先执行委托元素
+的回调句柄然后才是当前节点。一个事件的handlers中既包含当前节点的同一事件的事件回调同时包含委托节点的回调句柄。
+区分事件类型，组成事件队列（委托同样会执行）
+  事件句柄缓存读取  data_priv.get
+  事件对象兼容       jQuery.event.fix
+  区分事件类型，组成事件队列  jQuery.event.handlers
+父元素的句柄被执行，还是通过浏览器的冒泡机制。所以可以通过 event.preventDefault();  event.stopPropagation();在那一
+个节点阻止冒泡过程。
 
 [1]: http://www.cnblogs.com/aaronjs/category/511281.html
