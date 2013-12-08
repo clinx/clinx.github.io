@@ -4,7 +4,9 @@ layout: default
 <div>
     <h1><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></a></h1>
 	<p>{{ page.date|date:"%Y-%m-%d" }}</p>
+    <div id = "content">
 	{{ content }}
+    </div>
 </div>  
     <!--****迷***-->
     <div id="disqus_thread"></div>

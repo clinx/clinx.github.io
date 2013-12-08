@@ -1,0 +1,19 @@
+/* 重置浏览器CSS */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+body,button,input,select,textarea{font-size:12px/1.5;}
+input,select,textarea{font-size:100%;}
+input,select,textarea{font-size:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+th{text-align:inherit;}
+fieldset,img,a img{border:0;}
+
+body {font-family: "微软雅黑","Arial","Helvetica","sans-serif";font-size:16px;}
+a {color:#4A75B5;text-decoration:none;outline:none;}
+a:hover {text-decoration:underline}
+
+h2 {font-size:22px;font-weight:bold;margin-bottom:25px;}
+h3 {font-size:18px;font-weight:bold;margin-bottom:25px;}
+h4,h5,h6 {font-weight:bold;margin-bottom:15px;}
+
+#content{width:1060px;margin:90px auto 60px;min-height:400px;height:auto !important;height:400px; }
