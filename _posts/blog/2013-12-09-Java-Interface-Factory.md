@@ -16,7 +16,7 @@ webservice传输的时候都可能会用，传输数据量相对xml较小。所�
 	public interface DataTransform<T>{
 		public T jsonToObject(String jsonData);
     		public String objectToJson(T obj);
-	}
+	}  
 
 具体实现类：
 
@@ -52,7 +52,7 @@ webservice传输的时候都可能会用，传输数据量相对xml较小。所�
     	private RESTServiceProxy<T> getProxy(Class clazz, Path path){
         	 proxy = new RESTServiceProxy<T>(clazz, path);
     	}
-	}
+	}  
 
 server端
 
@@ -75,7 +75,7 @@ server端
     	public T get(String key){//用于子类实现
 
     	}
-	}
+	}  
 
 
 /**SOAP**/  
@@ -101,10 +101,11 @@ Object的转换，String是因为网络传输没用序列化，是传输XML的St
           //使用Java反射模拟动态代理。这里的InvocationHandler的作用可以在executeMethod实现过滤
       }
       
-    }
+    }  
 
 
-/**TibCOEMS**/
+/**TibCOEMS**/  
+
 EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker就是发布者和订阅者之间的关系。  
 这个一样可以封装对初始话JNDI context的管理，destention 目录书的查找管理。  
 发送消息（sender）主要就这几部，可以看到可变的是destName，messageText。自己可以想到业务抽象。  
@@ -118,9 +119,10 @@ EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker�
     textMsg = constructJMSHeaderForESI(textMsg);
     sender.send(textMsg);
 
-由于Broker是像配置servlet一样会调用broker的excute.而receiver跟borker差不多都是手动建立连接拿数据。
+由于Broker是像配置servlet一样会调用broker的excute.而receiver跟borker差不多都是手动建立连接拿数据。  
 
-/**JPA**/
+
+/**JPA**/  
 可以对unitEntityManger的代理。这个就不写了，基本一样。实践干事的还是JPA的实现框架（EclipseLink,Hibernate）。
 
 
