@@ -58,7 +58,7 @@ public   class ServerResource implement ClientResource<T>{
       return obj;
     }
    
-    public void  process(params,type){//相当于一个分配器统一处理各种类型（GET,PUT,UPDATE,DELETE,HEADER）的请求
+    public void  process(params,type){//相当于一个分配器统一处理各种类型（GET,POST,PUT,DELETE,HEADER）的请求
         if(type == "TYPE.GET"){
         	get(key);
         }else if(type == "TYPE.PUT"){//当然用switch也可以把执行TYPE弄成枚举
