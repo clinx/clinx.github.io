@@ -7,7 +7,7 @@ category: blog
 
 ##凡事把先看自己的原因。
 
-加了好多群，经常看见有人问setTimeout出错，唉。亲先看懂API [setTimeout][1].如果没看错第一个参数
+加了好多群，经常看见有人问setTimeout出错，唉。亲先看懂API [setTimeout][1].如果没看错第一个参数  
 setTimeout(function,milliseconds,lang) 是 function。
     <pre>
     定义一个方法：
@@ -30,11 +30,11 @@ setTimeout(function,milliseconds,lang) 是 function。
         console.log(i);
         输出0，然后setTimeoutMetod。
   </pre>
-很显然想要的结果是 输出0，然后setTimeoutMetod。为什么是0，然后是setTimeout.好厉害，js不是说的单线程处理么。
-单线程不是就一个单行道，干嘛会先输出0，然后输出setTimeout.
-单线程的如果一条到跑完不就结束了，为什么当我们点击页面控件的时候，js处理线程还是在执行。
+很显然想要的结果是 输出0，然后setTimeoutMetod。为什么是0，然后是setTimeout.好厉害，js不是说的单线程处理么。  
+单线程不是就一个单行道，干嘛会先输出0，然后输出setTimeout.  
+单线程的如果一条到跑完不就结束了，为什么当我们点击页面控件的时候，js处理线程还是在执行。  
 
-为了解决执行完就结束，想必大家都各自的解决方案。但一般实现是以让整个应用的代码处于一个循环当中。
+为了解决执行完就结束，想必大家都各自的解决方案。但一般实现是以让整个应用的代码处于一个循环当中。  
 
     比如这样(以下是我YY的想的通的实现形式): 
     while(1){

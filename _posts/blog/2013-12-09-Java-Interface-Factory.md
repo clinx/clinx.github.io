@@ -8,10 +8,10 @@ category: blog
 吐槽之公司Freamwork Team 对Java端封装，是使用jar的编程人员对Java API底层的透明，同时提供对公司业务interface的迎合。<br/>
 这一切的基本点就是使用代理模式和对各种业务的抽象。在代理类继承业务抽象interface,具体被代理对象为底层实现Object。
 
-下面就来说有Jackson,Restful,SOAP,TibCOEMS,JPA.的封装与实现。
-Jackson一个JSON转Java object,Java object转JSON的jar包，相信大家都比较熟悉。而且项目中可能都在用。因为JSON数据在AJAX和
-webservice传输的时候都可能会用，传输数据量相对xml较小。所以项目中不免会有很多需要有的Jackson的地方。
-使用Jackson在各种class和json字符串直接的转换还是不怎么方便，这个时候就产生了我们自己的期望的业务处理接口。
+下面就来说有Jackson,Restful,SOAP,TibCOEMS,JPA.的封装与实现。  
+Jackson一个JSON转Java object,Java object转JSON的jar包，相信大家都比较熟悉。而且项目中可能都在用。因为JSON数据在AJAX和  
+webservice传输的时候都可能会用，传输数据量相对xml较小。所以项目中不免会有很多需要有的Jackson的地方。  
+使用Jackson在各种class和json字符串直接的转换还是不怎么方便，这个时候就产生了我们自己的期望的业务处理接口。  
 
 	public interface DataTransform<T>{
 		public T jsonToObject(String jsonData);
@@ -79,7 +79,7 @@ server端
 
 
 /**SOAP**/  
-实现对PortType代理服务器端，当然客服端也可以实现wsimport生成的client代码进行代理。用JAXB进行XML String到
+实现对PortType代理服务器端，当然客服端也可以实现wsimport生成的client代码进行代理。用JAXB进行XML String到  
 Object的转换，String是因为网络传输没用序列化，是传输XML的String，这样方便验证。
 
     @WebService(name = "PortType", targetNamespace = "edu.one")
@@ -105,9 +105,9 @@ Object的转换，String是因为网络传输没用序列化，是传输XML的St
 
 
 /**TibCOEMS**/
-EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker就是发布者和订阅者之间的关系。
-这个一样可以封装对初始话JNDI context的管理，destention 目录书的查找管理。
-发送消息（sender）主要就这几部，可以看到可变的是destName，messageText。自己可以想到业务抽象。
+EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker就是发布者和订阅者之间的关系。  
+这个一样可以封装对初始话JNDI context的管理，destention 目录书的查找管理。  
+发送消息（sender）主要就这几部，可以看到可变的是destName，messageText。自己可以想到业务抽象。  
 
     conn = createConnection();
     session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
