@@ -8,8 +8,10 @@ category: blog
 吐槽之公司Freamwork Team 对Java端封装，是使用jar的编程人员对Java API底层的透明，同时提供对公司业务interface的迎合。<br/>
 这一切的基本点就是使用代理模式和对各种业务的抽象。在代理类继承业务抽象interface,具体被代理对象为底层实现Object。
 
-下面就来说有Jackson,Restful,SOAP,TibCOEMS,JPA.的封装与实现。  
-Jackson一个JSON转Java object,Java object转JSON的jar包，相信大家都比较熟悉。而且项目中可能都在用。因为JSON数据在AJAX和  
+下面就来说有Jackson,Restful,SOAP,TibCOEMS,JPA.的封装与实现。 
+  
+/**Jackson**/  
+一个JSON转Java object,Java object转JSON的jar包，相信大家都比较熟悉。而且项目中可能都在用。因为JSON数据在AJAX和  
 webservice传输的时候都可能会用，传输数据量相对xml较小。所以项目中不免会有很多需要有的Jackson的地方。  
 使用Jackson在各种class和json字符串直接的转换还是不怎么方便，这个时候就产生了我们自己的期望的业务处理接口。  
 
@@ -17,9 +19,9 @@ webservice传输的时候都可能会用，传输数据量相对xml较小。所�
 		public T jsonToObject(String jsonData);
     		public String objectToJson(T obj);
 	}  
-
+  
 具体实现类：
-
+  
 	public class  JacksonProxy<T> implements DataTransform<T>{
     		private ObjectMapper objectMapper = new ObjectMapper();//被代理对象
     		public T jsonToObject(String jsonData){
@@ -29,7 +31,8 @@ webservice传输的时候都可能会用，传输数据量相对xml较小。所�
        		//使用Jackson object mapper具体实现  readValue
     		｝
 	}
-
+   
+/**RESTful**/
 
 	/**restful同时实现client resource和 server resource**/ 
 	public interface ClientResource<T>{ //T为rest data transform object.
