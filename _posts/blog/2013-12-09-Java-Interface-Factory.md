@@ -122,7 +122,7 @@ EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker�
     textMsg = constructJMSHeaderForESI(textMsg);
     sender.send(textMsg);
 
-由于Broker是像配置servlet一样会调用broker的excute.而receiver跟borker差不多都是手动建立连接拿数据。  
+由于Broker是像配置servlet一样会调用broker的excute.而receiver跟sender差不多都是手动建立连接拿数据。  
 
 
 /**JPA**/  
