@@ -13,69 +13,69 @@ Jackson一个JSON转Java object,Java object转JSON的jar包，相信大家都比
 webservice传输的时候都可能会用，传输数据量相对xml较小。所以项目中不免会有很多需要有的Jackson的地方。
 使用Jackson在各种class和json字符串直接的转换还是不怎么方便，这个时候就产生了我们自己的期望的业务处理接口。
 
-public interface DataTransform<T>{
-	public T jsonToObject(String jsonData);
-    public String objectToJson(T obj);
-}
+	public interface DataTransform<T>{
+		public T jsonToObject(String jsonData);
+    		public String objectToJson(T obj);
+	}
 
 具体实现类：
 
-public class  JacksonProxy<T> implements DataTransform<T>{
-    private ObjectMapper objectMapper = new ObjectMapper();//被代理对象
-    public T jsonToObject(String jsonData){
-       //使用Jackson object mapper具体实现 writeValueAsString
-    }
-    public String objectToJson(T obj)｛
-       //使用Jackson object mapper具体实现  readValue
-    ｝
-}
+	public class  JacksonProxy<T> implements DataTransform<T>{
+    		private ObjectMapper objectMapper = new ObjectMapper();//被代理对象
+    		public T jsonToObject(String jsonData){
+		 //使用Jackson object mapper具体实现 writeValueAsString
+    		}
+    		public String objectToJson(T obj)｛
+       		//使用Jackson object mapper具体实现  readValue
+    		｝
+	}
 
 
-/**restful同时实现client resource和 server resource**/ 
-public interface ClientResource<T>{ //T为rest data transform object.
-	public T get(int id){
+	/**restful同时实现client resource和 server resource**/ 
+	public interface ClientResource<T>{ //T为rest data transform object.
+		public T get(int id){
 
-    }
-    public boolen update(int id,String obj){
+	 }
+	 public boolen update(int id,String obj){
 
-    }
-    ....//delete,getall
-}
+    	}
+    	....//delete,getall
+	}
 
-public class ClientResource implements ClientResource<T>{
-	private RESTServiceProxy<T> proxy;
-    public T get(id){
-      //service 建立service之间的连接，构建path.和请求方式GET
-      getProxy(class,path).get(id);
-    }
+	public class ClientResource implements ClientResource<T>{
+		private RESTServiceProxy<T> proxy;
+    		public T get(id){
+      		//service 建立service之间的连接，构建path.和请求方式GET
+		 getProxy(class,path).get(id);
+    	}
 
-    private RESTServiceProxy<T> getProxy(Class clazz, Path path){
-         proxy = new RESTServiceProxy<T>(clazz, path);
-    }
-}
+    	private RESTServiceProxy<T> getProxy(Class clazz, Path path){
+        	 proxy = new RESTServiceProxy<T>(clazz, path);
+    	}
+	}
 
 server端
 
-public   class ServerResource implements ClientResource<T>{
-	@GET
-	@Path("{id}")
-    public Response get(@Context HttpHeaders httpheader, @PathParam("id") String id)
-      process(id,"TYPE.GET");
-      return obj;
-    }
+	public   class ServerResource implements ClientResource<T>{
+		@GET
+		@Path("{id}")
+		 public Response get(@Context HttpHeaders httpheader, @PathParam("id") String id)
+			 process(id,"TYPE.GET");
+      			 return obj;
+    		}
    
-    public void  process(params,type){//相当于一个分配器统一处理各种类型（GET,POST,PUT,DELETE,HEADER）的请求
-        if(type == "TYPE.GET"){
-        	get(key);
-        }else if(type == "TYPE.PUT"){//当然用switch也可以把执行TYPE弄成枚举
+		 public void  process(params,type){//相当于一个分配器统一处理各种类型（GET,POST,PUT,DELETE,HEADER）的请求
+		 if(type == "TYPE.GET"){
+        		get(key);
+        		}else if(type == "TYPE.PUT"){//当然用switch也可以把执行TYPE弄成枚举
 
-        }
-    }
+        	}
+    	}
     
-    public T get(String key){//用于子类实现
+    	public T get(String key){//用于子类实现
 
-    }
-}
+    	}
+	}
 
 
 /**SOAP**/  
