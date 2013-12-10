@@ -81,23 +81,44 @@ public   class ServerResource implements ClientResource<T>{
 /**SOAP**/  
 实现对PortType代理服务器端，当然客服端也可以实现wsimport生成的client代码进行代理。用JAXB进行XML String到
 Object的转换，String是因为网络传输没用序列化，是传输XML的String，这样方便验证。
-@WebService(name = "PortType", targetNamespace = "edu.one")
-@HandlerChain(file = "PortType_handler.xml")
-public interface PortType{
-	@WebMethod(action = "edu.one/findData")
-    @WebResult(name = "result", targetNamespace = "edu.one/types/")
-    @RequestWrapper(localName = "findData", targetNamespace = "edu.one/types/", className = "edu.one.soap.FindData")
-    @ResponseWrapper(localName = "findDataResponse", targetNamespace = "edu.one/types/", className = "edu.one.soap.FindDataResponse")
-}
 
-public class PortTypeImpl implements PortType{
-	private DataService dataService = new DataService();
-}
+    @WebService(name = "PortType", targetNamespace = "edu.one")
+    @HandlerChain(file = "PortType_handler.xml")
+    public interface PortType{
+    	@WebMethod(action = "edu.one/findData")
+        @WebResult(name = "result", targetNamespace = "edu.one/types/")
+        @RequestWrapper(localName = "findData", targetNamespace = "edu.one/types/", className = "edu.one.soap.FindData")
+        @ResponseWrapper(localName = "findDataResponse", targetNamespace = "edu.one/types/", className = "edu.one.soap.    FindDataResponse")
+        public List<Data> findData(@WebParam(name = "criteria", targetNamespace = "edu.one/types/")
+            SearchCriteria criteria);
+    }
+    
+    public class PortTypeImpl implements PortType{
+    	private DataService dataService = new DataService();
+      public List<Data> findData(SearchCriteria criteria){
+          //验证
+          executeMethod(dataService,"findData", new Class[]{SearchCriteria.class}, new Object[]{criteria}); 
+          //使用Java反射模拟动态代理。这里的InvocationHandler的作用可以在executeMethod实现过滤
+      }
+      
+    }
 
 
 /**TibCOEMS**/
 EMS server在整个SOA架构中器中心枢纽作用。sender和borker就是发布者和订阅者之间的关系。
-这个一样封装对初始话JNDI context的管理，destention 目录书的查找管理。
+这个一样可以封装对初始话JNDI context的管理，destention 目录书的查找管理。
+发送消息（sender）主要就这几部，可以看到可变的是destName，messageText。自己可以想到业务抽象。
+
+    conn = createConnection();
+    session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+    dest = lookDestination(destName);
+    sender = session.createProducer(dest);
+    textMsg = session.createTextMessage(messageText);
+    // textMsg.setJMSDestination(dest);
+    textMsg = constructJMSHeaderForESI(textMsg);
+    sender.send(textMsg);
+
+由于Broker是想配置servlet一样会调用broker的
 
 /**JPA**/
 可以对unitEntityManger的代理。
