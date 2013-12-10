@@ -105,7 +105,7 @@ Object的转换，String是因为网络传输没用序列化，是传输XML的St
 
 
 /**TibCOEMS**/
-EMS server在整个SOA架构中器中心枢纽作用。sender和borker就是发布者和订阅者之间的关系。
+EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker就是发布者和订阅者之间的关系。
 这个一样可以封装对初始话JNDI context的管理，destention 目录书的查找管理。
 发送消息（sender）主要就这几部，可以看到可变的是destName，messageText。自己可以想到业务抽象。
 
@@ -118,12 +118,13 @@ EMS server在整个SOA架构中器中心枢纽作用。sender和borker就是发�
     textMsg = constructJMSHeaderForESI(textMsg);
     sender.send(textMsg);
 
-由于Broker是想配置servlet一样会调用broker的
+由于Broker是像配置servlet一样会调用broker的excute.而receiver跟borker差不多都是手动建立连接拿数据。
 
 /**JPA**/
-可以对unitEntityManger的代理。
+可以对unitEntityManger的代理。这个就不写了，基本一样。实践干事的还是JPA的实现框架（EclipseLink,Hibernate）。
 
 
-这样写的好处是我们直接调用调用业务实现对象就可以了，而不用关心具体的底层实现。而且Spirng中resource的读取同样是使用的
-这种封装机制。
+
+这样写的好处是我们直接调用调用业务实现对象就可以了，而不用关心具体的底层实现。而且Spirng中resource的读取同样是使用
+的这种封装机制。
 写的乱，相当于自己的笔记吧。哈哈
