@@ -20,13 +20,13 @@ public interface DataTransform<T>{
 
 具体实现类：
 
-public class  JacksonProxy<T> implement DataTransform<T>{
+public class  JacksonProxy<T> implements DataTransform<T>{
     private ObjectMapper objectMapper = new ObjectMapper();//被代理对象
     public T jsonToObject(String jsonData){
-       //使用Jackson object mapper具体实现
+       //使用Jackson object mapper具体实现 writeValueAsString
     }
     public String objectToJson(T obj)｛
-       //使用Jackson object mapper具体实现
+       //使用Jackson object mapper具体实现  readValue
     ｝
 }
 
@@ -42,18 +42,24 @@ public interface ClientResource<T>{ //T为rest data transform object.
     ....//delete,getall
 }
 
-public   class ClientResource implement ClientResource<T>{
-	WebResource service = client.resource(uri);//这个可能还被进一步封装，这样直接调用不方便
+public class ClientResource implements ClientResource<T>{
+	private RESTServiceProxy<T> proxy;
     public T get(id){
       //service 建立service之间的连接，构建path.和请求方式GET
+      getProxy(class,path).get(id);
+    }
+
+    private RESTServiceProxy<T> getProxy(Class clazz, Path path){
+         proxy = new RESTServiceProxy<T>(clazz, path);
     }
 }
 
 server端
 
-public   class ServerResource implement ClientResource<T>{
-	@GET(@PTAT{id})
-    public T get(int id){
+public   class ServerResource implements ClientResource<T>{
+	@GET
+	@Path("{id}")
+    public Response get(@Context HttpHeaders httpheader, @PathParam("id") String id)
       process(id,"TYPE.GET");
       return obj;
     }
@@ -73,7 +79,21 @@ public   class ServerResource implement ClientResource<T>{
 
 
 /**SOAP**/  
-实现对实际代理PORT,用JAXB进行XML String到Object的传送，String是因为网络传输没用序列化，是传输XML的String，这样方便验证。
+实现对PortType代理服务器端，当然客服端也可以实现wsimport生成的client代码进行代理。用JAXB进行XML String到
+Object的转换，String是因为网络传输没用序列化，是传输XML的String，这样方便验证。
+@WebService(name = "PortType", targetNamespace = "edu.one")
+@HandlerChain(file = "PortType_handler.xml")
+public interface PortType{
+	@WebMethod(action = "edu.one/findData")
+    @WebResult(name = "result", targetNamespace = "edu.one/types/")
+    @RequestWrapper(localName = "findData", targetNamespace = "edu.one/types/", className = "edu.one.soap.FindData")
+    @ResponseWrapper(localName = "findDataResponse", targetNamespace = "edu.one/types/", className = "edu.one.soap.FindDataResponse")
+}
+
+public class PortTypeImpl implements PortType{
+	private DataService dataService = new DataService();
+}
+
 
 /**TibCOEMS**/
 EMS server在整个SOA架构中器中心枢纽作用。sender和borker就是发布者和订阅者之间的关系。
