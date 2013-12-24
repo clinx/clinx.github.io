@@ -94,6 +94,9 @@ setTimeout(function,milliseconds,lang) 是 function。
     console.log(+new Date());//1386253639811
 
 
+异步编程的描述：点菜， 一个令牌叫号或者有一个店小儿管理。
+传统流水线： 一个排队等待像ATM一样一直站在那等待。
+
 ###最后给上Refernces:
 - [Events and timing in-depth][TIMING]
 - [timing-and-synchronization][SYNC]
