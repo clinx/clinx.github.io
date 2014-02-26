@@ -3,6 +3,7 @@ layout: default
 ---
 <div class="index-content">
 	<div class="section">
+	javascript {{ site.categories.javascript.size }}
         <ul class="artical-list">
             {% for post in site.categories.javascript %}
             <li>
