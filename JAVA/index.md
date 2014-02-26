@@ -2,7 +2,7 @@
 layout: default
 ---
 
-{% for post in site.categories.JAVA %}
+{% for post in site.categories.java %}
             <li>
                 <h2>
                     <a href="{{ post.url }}">{{ post.title }}</a>

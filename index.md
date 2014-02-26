@@ -4,7 +4,7 @@ layout: default
 <div class="index-content">
 	<div class="section">
         <ul class="artical-list">
-            {% for post in site.categories.Javascript %}
+            {% for post in site.categories.javascript %}
             <li>
                 <h2>
                     <a href="{{ post.url }}">{{ post.title }}</a>
@@ -13,7 +13,7 @@ layout: default
             </li>
             {% endfor %}
             
-            {% for post in site.categories.JAVA %}
+            {% for post in site.categories.java %}
             <li>
                 <h2>
                     <a href="{{ post.url }}">{{ post.title }}</a>
