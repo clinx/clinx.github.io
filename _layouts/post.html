@@ -4,8 +4,34 @@ layout: default
 <div>
     <h1 class="entry-title"><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></a></h1>
 	<p class="entry-date">{{ page.date|date:"%Y-%m-%d" }}</p>
-    <div id = "content">
-	{{ content }}
+    <div class="main clearfix">
+        <div class="text-body">
+            <div class="content-text">
+                {{ content }}
+            </div>
+         </div>
+         <div class="navbar">
+            <div class="logo"><span>UP down UP</span></div>
+            <ul>
+                <li>
+                    <a href="/">home</a>
+                </li>
+                <li>
+                     <a href="/JAVASCRIPT">JAVASCRIPT({{ site.categories.javascript.size }})</a>
+                </li>
+                <li>
+                     <a href="/CSSskill">CSS</a>                
+                </li>
+                <li>
+                     <a href="/JAVA">JAVA({{ site.categories.java.size }})</a> 
+                </li>
+                <li>
+                     <a href="/MATH">MATH</a> 
+                </li>
+            </ul>
+        </div>
+        <div class="splitline">
+        </div>
     </div>
 </div>  
     <!--****迷***-->
