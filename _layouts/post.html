@@ -1,6 +1,12 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link href="/css/prettify.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/css/default.css" type="text/css" />
+<title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+</head>
+<body>
 <div>
     <h1 class="entry-title"><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></a></h1>
 	<p class="entry-date">{{ page.date|date:"%Y-%m-%d" }}</p>
@@ -14,7 +20,7 @@ layout: default
             <div class="logo"><span>UP down UP</span></div>
             <ul>
                 <li>
-                    <a href="/">home</a>
+                    <a href="/">HOME</a>
                 </li>
                 <li>
                      <a href="/JAVASCRIPT">JAVASCRIPT({{ site.categories.javascript.size }})</a>
@@ -33,7 +39,35 @@ layout: default
         <div class="splitline">
         </div>
     </div>
-</div>  
+    <div class="back_top">
+        &nbsp;
+        <a onclick="home();return false;" href="javascript:void(0);" title="返回顶部">top</a>
+    </div>
+</div> 
+    <script type="text/javascript" src="/jslib/prettify.js"></script>
+    <script type="text/javascript" src="/jslib/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript">
+
+
+        function home(){
+            $('html, body').animate({
+            scrollTop: $(".entry-title").offset().top
+            }, 300);
+        }
+
+        $(function(){
+            prettyPrint();
+            $(function() {
+                $(window).scroll(function() {
+                    if ($(window).scrollTop() > 100) {
+                        $(".back_top").fadeIn(1500);
+                    } else {
+                        $(".back_top").fadeOut(1000);
+                    }
+                });
+            });
+        });
+    </script> 
     <!--****迷***-->
     <div id="disqus_thread"></div>
     <script type="text/javascript">
@@ -48,4 +82,7 @@ layout: default
         })();
     </script>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
+
+</body>
+
+</html>
