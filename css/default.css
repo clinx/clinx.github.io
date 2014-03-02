@@ -118,8 +118,14 @@ h4,h5,h6 {font-weight:bold;margin-bottom:15px;}
 	text-decoration: none;
 	color: #606566;
 	font-size: 14px;
+	margin: 13px 0 0 17px;
 }
 
 .post a:hover{
 	color: #B43104;
+}
+.post .title-desc{
+	font-size: 14px;
+	color: #017CB9;
+	margin-left: 17px;
 }

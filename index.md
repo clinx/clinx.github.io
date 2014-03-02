@@ -8,7 +8,7 @@ layout: default
                 {% for post in site.categories.javascript %}
                     <li class="post">
                         <a href="{{ post.url }}">{{ post.title }}</a>
-                        <div "title-desc">{{ post.description }}</div>
+                        <div class="title-desc">{{ post.description }}</div>
                     </li>
                 {% endfor %}
             </ul>
@@ -16,7 +16,7 @@ layout: default
                 {% for post in site.categories.java %}
                     <li class="post">
                         <a href="{{ post.url }}">{{ post.title }}</a>
-                        <div "title-desc">{{ post.description }}</div>
+                        <div class="title-desc">{{ post.description }}</div>
                     </li>
                 {% endfor %}
             </ul>
@@ -26,7 +26,7 @@ layout: default
         <div class="logo"><span>UP down UP</span></div>
         <ul>
             <li>
-                <a href="/">home</a>
+                <a href="/">HOME</a>
             </li>
             <li>
                  <a href="/JAVASCRIPT">JAVASCRIPT({{ site.categories.javascript.size }})</a>
