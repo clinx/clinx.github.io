@@ -7,7 +7,7 @@ layout: default
             <ul id="jslist">
                 {% for post in site.categories.javascript %}
                     <li class="post">
-                        <a href="{{ post.url }}">{{ post.title }}</a>
+                        <a href="{{ post.url }}">{{ post.title }} <span>{{ post.date|date:"%Y-%m-%d" }}</span></a>
                         <div class="title-desc">{{ post.description }}</div>
                     </li>
                 {% endfor %}
@@ -15,7 +15,7 @@ layout: default
             <ul id="javalist">
                 {% for post in site.categories.java %}
                     <li class="post">
-                        <a href="{{ post.url }}">{{ post.title }}</a>
+                        <a href="{{ post.url }}">{{ post.title }} <span>{{ post.date|date:"%Y-%m-%d" }}</span></a>
                         <div class="title-desc">{{ post.description }}</div>
                     </li>
                 {% endfor %}
