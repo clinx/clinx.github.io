@@ -1,27 +1,47 @@
 ---
 layout: default
 ---
-<div class="index-content">
-	<div class="section">
-	javascript {{ site.categories.javascript.size }}
-        <ul class="artical-list">
-            {% for post in site.categories.javascript %}
+<div class="index-content clearfix">    
+    <div class="section">
+        <div class="artical-content artical-list">
+            <ul id="jslist">
+                {% for post in site.categories.javascript %}
+                    <li class="post">
+                        <a href="{{ post.url }}">{{ post.title }}</a>
+                        <div "title-desc">{{ post.description }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <ul id="javalist">
+                {% for post in site.categories.java %}
+                    <li class="post">
+                        <a href="{{ post.url }}">{{ post.title }}</a>
+                        <div "title-desc">{{ post.description }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="navbar">
+        <div class="logo"><span>UP down UP</span></div>
+        <ul>
             <li>
-                <h2>
-                    <a href="{{ post.url }}">{{ post.title }}</a>
-                </h2>
-                <div "title-desc">{{ post.description }}</div>
+                <a href="/">home</a>
             </li>
-            {% endfor %}
-            
-            {% for post in site.categories.java %}
             <li>
-                <h2>
-                    <a href="{{ post.url }}">{{ post.title }}</a>
-                </h2>
-                <div "title-desc">{{ post.description }}</div>
+                 <a href="/JAVASCRIPT">JAVASCRIPT({{ site.categories.javascript.size }})</a>
             </li>
-            {% endfor %}
+            <li>
+                 <a href="/CSSskill">CSS</a>                
+            </li>
+            <li>
+                 <a href="/JAVA">JAVA({{ site.categories.java.size }})</a> 
+            </li>
+            <li>
+                 <a href="/MATH">MATH</a> 
+            </li>
         </ul>
+    </div>
+    <div class="splitline">
     </div>
 </div>
