@@ -23,7 +23,7 @@ Jquery全世界都在用，没有理由不学习一下。开个玩笑，逗你�
 比如odd,visiable像这样的$('li:odd'),$('div:visiable')如果不知道可以看看CSS3的API。  
 这里传入多种参数，在实现的时候肯定会通过if进行区分判断，而Jquery用了一种token的思想，先把传入进来的参数用词法分析的套路进行取词，然后得到有顺序的取词结构进行语义分析。语义分析的时候是从右到左的顺序进行解析。从有到左的好处是儿子一定只有一个父亲，而父亲不一定就只有一个儿子。  
 
-比如：div .clzName #idname 
+比如：div .clzName #idname  
     <span style="padding-left:10px;">如果从左向右找首先要找到所有的div 然后遍历所有后代节点包含 .className的节点 然后才是Id
     而如果从右向左就不会有这种情况了，首先找id=#idname的节点,然后是自己的祖先节点，一直到div.
     这和一棵倒树，一样从叶子（明确对象）到根（明确）的路径一般很好找，而从根（明确）到叶子（模糊）不好找一样。
@@ -81,7 +81,7 @@ data缓存的回调句柄进行绑定。（分解事件名与句柄）。而事�
 流量器默认事件触发的入口是通过addEventListener的handler进行的，所以流量器默认行为的事件需要对handler
 封装，而Jquery自定义事件是Jquery封装代码流程手动触发的。这个也可一共用handler处理。所以绑定的时候
 需要封装好handler，而handler保留一个对当前对象缓存.而handler只着一件是就把处理丢给这个方法  
-jQuery.event.dispatch.apply( eventHandle.elem, arguments )
+jQuery.event.dispatch.apply( eventHandle.elem, arguments )  
    1).  获取数据缓存  
    2).  创建编号  
    3).  分解事件名与句柄  
