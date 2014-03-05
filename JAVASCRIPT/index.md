@@ -16,7 +16,7 @@ layout: default
         </div>
     </div>
     <div class="navbar">
-        <div class="logo"><span>UP down UP</span></div>
+        <div class="logo"><span>Mr.^('-')^</span></div>
         <ul>
             <li>
                 <a href="/">HOME</a>
