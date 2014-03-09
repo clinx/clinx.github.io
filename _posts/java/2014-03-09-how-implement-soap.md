@@ -27,19 +27,20 @@ response的格式。这只是跟协议本身的request的和response有关。而
   - Port:定义为协议/数据格式绑定与具体Web访问地址组合的单个服务访问点。客服端用到的qname. 
   - Service:对应整个wsdl
 
+<pre>
+@WebService(serviceName = "StockQuoteService",
+		portName = "StockQuotePort",	
+		targetNamespace = "http://localhost:8080/stockquote")
+@SOAPBinding
+public class StockQuotePortType {
 
-	@WebService(serviceName = "StockQuoteService",
-			portName = "StockQuotePort",	
-			targetNamespace = "http://localhost:8080/stockquote")
-	@SOAPBinding
-	public class StockQuotePortType {
-	
-		@WebMethod
-		public TradePriceResult GetLastTradePrice(TradePriceRequest tradeRequest) {
-	
-			TradePriceResult priceResult =new PriceResult(); 
-	
-			return priceResult;
-		}
+	@WebMethod
+	public TradePriceResult GetLastTradePrice(TradePriceRequest tradeRequest) {
+
+		TradePriceResult priceResult =new PriceResult(); 
+
+		return priceResult;
 	}
+}</pre>
+
 然后通过wsgen进行生成wsdl。客服断通过wsimport ：http://localhost:8080/stockquote?wsdl进行生成客服端。实践开发中可能通过soapui继续测试。当然也可能用RESTful(一种框架，非标准)进行代替。
