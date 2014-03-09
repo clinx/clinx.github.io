@@ -12,7 +12,7 @@ category: java
 
 /**Jackson**/   
 一个JSON转Java object,Java object转JSON的jar包，相信大家都比较熟悉。而且项目中可能都在用。因为JSON数据在AJAX和
-webservice传输的时候都可能会用，传输数据量相对xml较小。所以项目中不免会有很多需要有的Jackson的地方。
+webservice传输,NoSQL 聚集（key-value）的时候都可能会用，传输数据量相对xml较小。所以项目中不免会有很多需要有的Jackson的地方。
 使用Jackson在各种class和json字符串之间的直接转换还是不怎么方便，这个时候就产生了我们自己的期望的业务处理接口。 
 
 	public interface DataTransform<T>{
@@ -126,7 +126,7 @@ EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker�
 
 由于Broker是像配置servlet一样会调用broker的execute.而receiver跟sender差不多都是手动建立连接拿数据，而且需要自己建
 立线程来接受消息，相当于我们主动去拿消息。 broker的execute实际触发是在MessageListener对onMessage的回调时候执行，相当
-于服务器推送，不是我们去拿数据，而是服务器自己发送到comsumer.  
+于服务器推送，不是我们去拿数据，而是服务器自己发送到comsumer. 可能像java socket中注册相应操作的回调.
 
 
 /**JPA**/  
