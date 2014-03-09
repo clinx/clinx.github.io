@@ -25,7 +25,8 @@ response的格式。这只是跟协议本身的request的和response有关。而
   - PortType:具体java类，可能包含多个operation(函数)  
   - Binding：端口类型的具体协议和数据格式规范的绑定。(soap/http)  
   - Port:定义为协议/数据格式绑定与具体Web访问地址组合的单个服务访问点。客服端用到的qname. 
-  - Service:对应整个wsdl  
+  - Service:对应整个wsdl
+
 
 	@WebService(serviceName = "StockQuoteService",
 			portName = "StockQuotePort",	
