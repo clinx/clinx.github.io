@@ -13,17 +13,17 @@ response的格式。这只是跟协议本身的request的和response有关。而
 
 需求有了，看一看技术，会点Java，OK。现在主流的soap webserice实现JAX-WS。相对于JAX-RPC，直接对SAAJ和JAXB的封装。省去对具体SOAP协议的实现和POJO转XML的过程。好像还不错。
 实现过程一般分WSDL契约优先和JAVA CODE优先。   
-* WSDL契约优先就是先定义好wsdl文件，然后根据wsdl去写代码，而且要求对xml schema,有比较完善的了解。
-* 代码优先的话就是先从code入手，然后根据annotation去生成wsdl和xsd。
+  - WSDL契约优先就是先定义好wsdl文件，然后根据wsdl去写代码，而且要求对xml schema,有比较完善的了解。
+  - 代码优先的话就是先从code入手，然后根据annotation去生成wsdl和xsd。
 
-看来还是代码优先方便点。不然就要自己定义wsdl的一下元素。 
-* Types:webserice中的参数和返回值类型。这里就是清晰莫只股票的ID.和这只股票的具体信息。
-* Message：对webserice中的type进行分类，那些属于input,那些属于output.
-* Operation: 把input和output再分组，归纳到不同的函数中。
-* PortType:具体java类，可能包含多个operation(函数)
-* Binding：端口类型的具体协议和数据格式规范的绑定。(soap/http)
-* Port:定义为协议/数据格式绑定与具体Web访问地址组合的单个服务访问点。客服端用到的qname.
-* Service:对应整个wsdl
+看来还是代码优先方便点。不然就要自己定义wsdl的一下元素.  
+  - Types:webserice中的参数和返回值类型。这里就是清晰莫只股票的ID.和这只股票的具体信息。
+  - Message：对webserice中的type进行分类，那些属于input,那些属于output.
+  - Operation: 把input和output再分组，归纳到不同的函数中。
+  - PortType:具体java类，可能包含多个operation(函数)
+  - Binding：端口类型的具体协议和数据格式规范的绑定。(soap/http)
+  - Port:定义为协议/数据格式绑定与具体Web访问地址组合的单个服务访问点。客服端用到的qname.
+  - Service:对应整个wsdl
 
 	@WebService(serviceName = "StockQuoteService",
 			portName = "StockQuotePort",	
