@@ -146,6 +146,12 @@ h4,h5,h6 {font-weight:bold;margin-bottom:15px;}
 	border-radius: 5px;
 }
 
+.content-text ul{
+	list-style: none outside none;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
 .content-text p{
 	padding: 8px 0;
 	color: #555;
