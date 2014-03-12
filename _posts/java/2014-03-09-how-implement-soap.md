@@ -5,7 +5,7 @@ description: SOAP简单对象访问协议，使用WSDL对服务进行描述。SO
 category: java
 ---
 
-SOAP(Simple Object Access Protocol)一种webservice具体实现的代名词。而webserice一般是作用与不同系统不同平台而产生。那么不同系统和平台对数据
+SOAP(Simple Object Access Protocol)一种webservice具体实现的代名词,基于应用层的协议同HTTP。而webserice一般是作用与不同系统不同平台而产生。那么不同系统和平台对数据
 的实现是不同的，如果要对各自系统中的对象进行读写操作，那么就需要一个共用消息载体XML，因为各系统都有相当多的lib进行支持.唉扯远了。有了消息当然是不够的，还需要对消息格式的限制，SOAP则是一个基于xml的协议，大家都共同认可这种格式的协议，就是说你发什么request和
 response的格式。这只是跟协议本身的request的和response有关。而我们一般想知道的这个webservice具体提供了什么样的服务，这个时候就有WSDL(webservice description language)来进行对你要提供的具体服务进行描述。
 
