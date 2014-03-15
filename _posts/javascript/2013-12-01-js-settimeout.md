@@ -78,7 +78,8 @@ var callMethod = function(){
        var currentTime = +new Date();
        for(i=0; i < len;i++){
          var currentSetTimeout = queue[setTimeout回调queue][i];
-          if(currentSetTimeout.delayTime+setTimeoutItem.startRecodeTime < currentTime){
+          if(currentSetTimeout.delayTime+setTimeoutItem.
+            startRecodeTime < currentTime){
              currentSetTimeout.callBack();
           }
        }
@@ -101,7 +102,8 @@ var callMethod = function(){
 传统流水线： 一个排队等待像ATM一样一直站在那等待。
 
 在实际工程中settimeout的妙用。
-- 需要长时间处理的ui render,也就是动画.  可以像下面这样改进。
+- 需要长时间处理的ui render,也就是动画.  可以像下面这样改进。  
+
     function render(){
         var element = document.getElementById('newUI');
         if(element.hight <= 100){
@@ -111,7 +113,8 @@ var callMethod = function(){
     }
     setTimeout(render,0); //当然可以用RequestAnimationFrame
 
-- 函数节流，减少不必要的重复操作。比如你有一个列表，当你点击其中任何一项的时候需要刷新对应类容区域。这个时候当用户点击过快就可能产生很多的ajax请求。
+- 函数节流，减少不必要的重复操作。比如你有一个列表，当你点击其中任何一项的时候需要刷新对应类容区域。这个时候当用户点击过快就可能产生很多的ajax请求。  
+
     var indicator;
     function delayUserAction(event){
         currentid = event.src.id;
