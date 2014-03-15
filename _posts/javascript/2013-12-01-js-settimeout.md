@@ -116,18 +116,20 @@ var callMethod = function(){
 
 - 函数节流，减少不必要的重复操作。比如你有一个列表，当你点击其中任何一项的时候需要刷新对应类容区域。这个时候当用户点击过快就可能产生很多的ajax请求。  
 
-    var indicator;
-    function delayUserAction(event){
-        currentid = event.src.id;
-        indicator = currentid;
-        setTimeout(function(param){ return function(){showContent(param)}; }(indicator),30);
-    }
+<pre>
+var indicator;
+function delayUserAction(event){
+    currentid = event.src.id;
+    indicator = currentid;
+    setTimeout(function(param){ return function(){showContent(param)}; }(indicator),30);
+}
 
-    function showContent(currentid){
-        if(currentid == indicator){//过滤点
-            ajaxCall();
-        }
+function showContent(currentid){
+    if(currentid == indicator){//过滤点
+        ajaxCall();
     }
+}
+</pre>
 
 ###最后给上References:
 - [Events and timing in-depth][TIMING]
