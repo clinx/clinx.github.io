@@ -106,15 +106,16 @@ var callMethod = function(){
 
 - 需要长时间处理的ui render,也就是动画.  可以像下面这样改进。  
 
-    function render(){
-        var element = document.getElementById('newUI');
-        if(element.hight <= 100){
-            element.hight += 10;
-            setTimeout(render,0);
-        }
+<pre>
+function render(){
+    var element = document.getElementById('newUI');
+    if(element.hight <= 100){
+        element.hight += 10;
+        setTimeout(render,0);
     }
-    setTimeout(render,0); //当然可以用RequestAnimationFrame
-
+}
+setTimeout(render,0); //当然可以用RequestAnimationFrame
+</pre>
 - 函数节流，减少不必要的重复操作。比如你有一个列表，当你点击其中任何一项的时候需要刷新对应类容区域。这个时候当用户点击过快就可能产生很多的ajax请求。  
 
 <pre>
