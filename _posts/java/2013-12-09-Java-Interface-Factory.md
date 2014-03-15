@@ -12,7 +12,7 @@ category: java
 
 /**Jackson**/   
 一个JSON转Java object,Java object转JSON的jar包，相信大家都比较熟悉。而且项目中可能都在用。因为JSON数据在AJAX和
-webservice传输,NoSQL 聚集（key-value）的时候都可能会用，传输数据量相对xml较小。所以项目中不免会有很多需要有的Jackson的地方。
+webservice传输,NoSQL 聚集（key-value）的时候都可能会用，传输数据量相对xml较小，而且也来表达链式结构。所以项目中不免会有很多需要有的Jackson的地方。
 使用Jackson在各种class和json字符串之间的直接转换还是不怎么方便，这个时候就产生了我们自己的期望的业务处理接口。 
 
 	public interface DataTransform<T>{
@@ -32,7 +32,7 @@ webservice传输,NoSQL 聚集（key-value）的时候都可能会用，传输数
     		｝
 	}
    
-/**RESTful**/  
+/**RESTful**/常用底层框架Jersey  
 
 	/**restful同时实现client resource和 server resource**/ 
 	public interface ClientResource<T>{ //T为rest data transform object.
@@ -81,7 +81,7 @@ webservice传输,NoSQL 聚集（key-value）的时候都可能会用，传输数
 	}
 
 
-/**SOAP**/  
+/**SOAP**/    
 实现对PortType代理服务器端，当然客服端也可以实现wsimport生成的client代码进行代理。用JAXB进行XML String到  
 Object的转换，String是因为网络传输没用序列化，是传输XML的String，这样方便验证。
 
@@ -126,14 +126,13 @@ EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker�
 
 由于Broker是像配置servlet一样会调用broker的execute.而receiver跟sender差不多都是手动建立连接拿数据，而且需要自己建
 立线程来接受消息，相当于我们主动去拿消息。 broker的execute实际触发是在MessageListener对onMessage的回调时候执行，相当
-于服务器推送，不是我们去拿数据，而是服务器自己发送到comsumer. 可能像java socket中注册相应操作的回调.
+于服务器推送，不是我们去拿数据，而是服务器自己发送到comsumer. 可能是向java socket中注册相应操作的回调.
 
 
 /**JPA**/  
-可以对unitEntityManger的代理。这个就不写了，基本一样。实践干事的还是JPA的实现框架（EclipseLink,Hibernate）。
+可以对unitEntityManger的代理。这个就不写了，基本一样。实际干事的还是JPA的实现框架（EclipseLink,Hibernate）。
 
 
 
-这样写的好处是我们直接调用调用业务实现对象就可以了，而不用关心具体的底层实现。而且Spirng中resource的读取同样是使用
-的这种封装机制。
+这样写的好处是我们直接调用调用业务实现对象就可以了，而不用关心具体的底层实现。而且Spirng中resource的读取同样是使用的这种封装机制。
 写的乱，相当于自己的笔记吧。哈哈

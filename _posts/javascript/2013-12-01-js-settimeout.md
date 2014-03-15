@@ -9,28 +9,28 @@ category: javascript
 
 加了好多群，经常看见有人问setTimeout出错，唉。亲先看懂API [setTimeout][1].如果没看错第一个参数  
 setTimeout(function,milliseconds,lang) 是 function。
-    <pre>
-    定义一个方法：
-    var i = 0;d
-    var callMethod = function(){
-    	console.log("setTimeoutMetod");
-    	i = i+1;
-    	return function(){};
-    }
-    
-    错误演示：
-    1).  setTimeout(callMethod(),1000);
-         console.log(i);
-         输出顺序setTimeoutMetod，然后1
-    2).  setTimeout("callMethod()",1000);//虽然输出正确，但不建议这样使用。
-         console.log(i);
-         输出0，然后setTimeoutMetod。
-    一般性正确使用：
-        //注意这个参数是一个Function object.相当于C或C++中的函数指针，C#的委托。
-        setTimeout(callMethod,1000); 
-        console.log(i);
-        输出0，然后setTimeoutMetod。
-  </pre>
+<pre>
+定义一个方法：
+var i = 0;d
+var callMethod = function(){
+	console.log("setTimeoutMetod");
+	i = i+1;
+	return function(){};
+}
+
+错误演示：
+1).  setTimeout(callMethod(),1000);
+     console.log(i);
+     输出顺序setTimeoutMetod，然后1
+2).  setTimeout("callMethod()",1000);//虽然输出正确，但不建议这样使用。
+     console.log(i);
+     输出0，然后setTimeoutMetod。
+一般性正确使用：
+    //注意这个参数是一个Function object.相当于C中的函数指针，C#的委托。
+    setTimeout(callMethod,1000); 
+    console.log(i);
+    输出0，然后setTimeoutMetod。
+</pre>
 
 很显然想要的结果是 输出0，然后setTimeoutMetod。为什么是0，然后是setTimeout.好厉害，js不是说的单线程处理么。 
 单线程不是就一个单行道，干嘛会先输出0，然后输出setTimeout.
@@ -97,10 +97,35 @@ setTimeout(function,milliseconds,lang) 是 function。
     console.log(+new Date());//1386253639811
 
 
-异步编程的描述：点菜， 一个令牌叫号或者有一个店小儿管理。
+异步编程的描述：点菜， 一个令牌叫号或者有一个店小儿管理。领了号，你就不用在那站着等。而js中就是对function的管理。
 传统流水线： 一个排队等待像ATM一样一直站在那等待。
 
-###最后给上Refernces:
+在实际工程中settimeout的妙用。
+- 需要长时间处理的ui render,也就是动画.  可以像下面这样改进。
+    function render(){
+        var element = document.getElementById('newUI');
+        if(element.hight <= 100){
+            element.hight += 10;
+            setTimeout(render,0);
+        }
+    }
+    setTimeout(render,0); //当然可以用RequestAnimationFrame
+
+- 函数节流，减少不必要的重复操作。比如你有一个列表，当你点击其中任何一项的时候需要刷新对应类容区域。这个时候当用户点击过快就可能产生很多的ajax请求。
+    var indicator;
+    function delayUserAction(event){
+        currentid = event.src.id;
+        indicator = currentid;
+        setTimeout(function(param){ return function(){showContent(param)}; }(indicator),30);
+    }
+
+    function showContent(currentid){
+        if(currentid == indicator){//过滤点
+            ajaxCall();
+        }
+    }
+
+###最后给上References:
 - [Events and timing in-depth][TIMING]
 - [timing-and-synchronization][SYNC]
 
