@@ -102,7 +102,8 @@ var callMethod = function(){
 异步编程的描述：点菜， 一个令牌叫号或者有一个店小儿管理。领了号，你就不用在那站着等。而js中就是对function的管理。
 传统流水线： 一个排队等待像ATM一样一直站在那等待。
 
-在实际工程中settimeout的妙用。
+在实际工程中settimeout的妙用。 
+
 - 需要长时间处理的ui render,也就是动画.  可以像下面这样改进。  
 
     function render(){
@@ -121,7 +122,10 @@ var indicator;
 function delayUserAction(event){
     currentid = event.src.id;
     indicator = currentid;
-    setTimeout(function(param){ return function(){showContent(param)}; }(indicator),30);
+    setTimeout(function(param)
+        { return function(){showContent(param)}; }
+        (indicator),30
+    );
 }
 
 function showContent(currentid){
