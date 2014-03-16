@@ -19,7 +19,7 @@ transaction的最小操作元).然后是final的Primitive类型数据是线程�
 
 Java中对共享对象实现同步分两种：  
 1.Synchronized 用同步代码块，如果有多个方法访问入口是需配合信号互斥量（wait）共同使用.Synchronized(lock)  
-2.ReentrantLock可以使用它创建一个公平锁或者不公平锁。具有可伸缩性控制（时间锁等候、可中断锁等候、无块结构锁、多个条件变量或者锁投票），性能会更好。但不能忘了finally加unlock. Lock lock = new ReentrantLock().而且有一个制度的读写锁。
+2.ReentrantLock可以使用它创建一个公平锁或者不公平锁。具有可伸缩性控制（时间锁等候、可中断锁等候、无块结构锁、多个条件变量或者锁投票），性能会更好。但不能忘了finally加unlock. Lock lock = new ReentrantLock().而且有一个制度的读写锁。  
 
 ##参考质料  
 JAVA并发编程实践  
