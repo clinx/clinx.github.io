@@ -93,7 +93,7 @@ var callMethod = function(){
              console.log(+new Date());//1386253640566
     }, 1000);
     var fibo = function(n){
-         return n>1?fibo(n-1)+fibo(n-2):1; 
+         return n<=0?0:n=1?1:fibo(n-1)+fibo(n-2); 
     }
     console.log(fibo(25));//121393
     console.log(+new Date());//1386253639811
