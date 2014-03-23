@@ -19,10 +19,135 @@ transaction的最小操作元).然后是final的Primitive类型数据是线程�
 
 Java中对共享对象实现同步分两种：  
 1.Synchronized 用同步代码块，如果有多个方法访问入口是需配合信号互斥量（wait）共同使用.Synchronized(lock)  
-2.ReentrantLock可以使用它创建一个公平锁或者不公平锁。具有可伸缩性控制（时间锁等候、可中断锁等候、无块结构锁、多个条件变量或者锁投票），性能会更好。但不能忘了finally加unlock. Lock lock = new ReentrantLock().而且有一个制度的读写锁。  
+2.ReentrantLock可以使用它创建一个公平锁或者不公平锁。具有可伸缩性控制（时间锁等候、可中断锁等候、无块结构锁、多个条件变量或者锁投票），性能会更好。但不能忘了finally加unlock. Lock lock = new ReentrantLock().而且有一个特定的读写锁。  
+<pre>
+public class Account {
+	private int balance = 1000;
+	public void deposit(int amount){
+		balance += amount;
+	}
+	public void withdraw(int amount){
+		balance -= amount;
+	}
+	public int getBalance(){
+		return balance;
+	}
+	public static void transfer(Account acc1, Account acc2, int amount){
+		acc1.withdraw(amount);
+		acc2.deposit(amount);
+	}
+}	
+</pre>
+<pre>
+public class App {
+	public static void main(String[] args) throws InterruptedException{
+		final Runner runner =new Runner();
+		Thread t1 =new Thread(){
+			public void run(){
+					try {
+						runner.firstThread();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+			}
+		};
+
+		Thread t2 =new Thread(){
+			public void run(){
+					try {
+						runner.secondThread();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+			}
+		};
+		
+		t1.start();
+		t2.start();
+		t1.join();
+		t2.join();
+		runner.finished();
+	}
+	
+}
+</pre>
+<pre>
+import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class Runner {
+
+	private Account acc1 = new Account();
+	private Account acc2 = new Account();
+	private Lock lock1 = new ReentrantLock();
+	private Lock lock2 = new ReentrantLock();
+	
+	private void acquireLocks(Lock firstLock, Lock secondLock) throws InterruptedException{
+		while(true){
+			// acquire locks
+			boolean gotFirstLock = false;
+			boolean gotSecondLock = false;
+			try{
+				gotFirstLock = firstLock.tryLock();
+				gotSecondLock = secondLock.tryLock();
+			}finally{
+				if(gotFirstLock && gotSecondLock){
+					return;
+				}
+				if(gotFirstLock){
+					firstLock.unlock();
+				}
+				if(gotSecondLock){
+					secondLock.unlock();
+				}
+				
+			}
+			Thread.sleep(1);
+		}
+	}
+	
+	public void firstThread() throws InterruptedException{
+		Random random = new Random();
+		for(int i=0; i<1000; i++){
+			acquireLocks(lock1,lock2);
+			try{
+				Account.transfer(acc1, acc2, random.nextInt(1000));
+			}finally{
+				lock2.unlock();
+				lock1.unlock();
+			}
+			
+		}
+	}
+	
+	public void secondThread() throws InterruptedException{
+		Random random = new Random();
+		for(int i=0; i<1000; i++){
+			acquireLocks(lock2,lock1);
+			try{
+				Account.transfer(acc2, acc1, random.nextInt(1000));
+			}finally{
+				lock2.unlock();
+				lock1.unlock();
+			}
+			
+		}
+	}
+	
+	public void finished(){
+		System.out.println("Account 1 balance: " + acc1.getBalance());
+		System.out.println("Account 2 balance: " + acc2.getBalance());
+		System.out.println("Total balance: " + (acc1.getBalance() + acc2.getBalance()));
+	}
+}
+</pre>
+
+其他[同步demo code](https://github.com/clinx/ConcurrencyThreadDemo) 
 
 ##参考质料  
-JAVA并发编程实践  
+JAVA并发编程实践 
+[Cave of programming](http://www.caveofprogramming.com/)  
 
 
 
