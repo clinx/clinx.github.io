@@ -83,7 +83,8 @@ public class Runner {
 	private Lock lock1 = new ReentrantLock();
 	private Lock lock2 = new ReentrantLock();
 	
-	private void acquireLocks(Lock firstLock, Lock secondLock) throws InterruptedException{
+	private void acquireLocks(Lock firstLock, Lock secondLock)
+	 throws InterruptedException{
 		while(true){
 			// acquire locks
 			boolean gotFirstLock = false;
@@ -138,7 +139,8 @@ public class Runner {
 	public void finished(){
 		System.out.println("Account 1 balance: " + acc1.getBalance());
 		System.out.println("Account 2 balance: " + acc2.getBalance());
-		System.out.println("Total balance: " + (acc1.getBalance() + acc2.getBalance()));
+		System.out.println("Total balance: " + (acc1.getBalance() 
+		+ acc2.getBalance()));
 	}
 }
 </pre>
@@ -146,7 +148,7 @@ public class Runner {
 其他[同步demo code](https://github.com/clinx/ConcurrencyThreadDemo) 
 
 ##参考质料  
-JAVA并发编程实践 
+JAVA并发编程实践  
 [Cave of programming](http://www.caveofprogramming.com/)  
 
 
