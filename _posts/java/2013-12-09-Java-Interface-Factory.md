@@ -6,85 +6,76 @@ category: java
 ---
 
 吐槽之公司Freamwork Team 对Java端封装，是使编程人员对用jar的底层的透明，同时提供对公司业务interface的迎合。
-这一切的基本点就是使用代理模式和对各种业务的抽象。在代理类继承业务抽象interface,具体被代理对象为底层实现Object。
+这一切的基本点就是使用代理模式和对各种业务的抽象。在代理类继承业务抽象interface,具体被代理对象为底层实现Object。换一种说法就是用一个类(代理对象）来关联，同时用java反射的动态性实现解耦。
 
 下面就来看一下对Jackson,Restful,SOAP,TibCOEMS,JPA.的封装与实现。
 
 /**Jackson**/   
 一个JSON转Java object,Java object转JSON的jar包，相信大家都比较熟悉。而且项目中可能都在用。因为JSON数据在AJAX和
-webservice传输,NoSQL 聚集（key-value）的时候都可能会用，传输数据量相对xml较小，而且也来表达链式结构。所以项目中不免会有很多需要有的Jackson的地方。
-使用Jackson在各种class和json字符串之间的直接转换还是不怎么方便，这个时候就产生了我们自己的期望的业务处理接口。 
+webservice传输,NoSQL 聚集（key-value）的时候都可能会用，传输数据量相对xml较小，而且用来表达层次的链式结构。所以项目中不免会有很多需要有的Jackson的地方。
+使用Jackson在各种class和json字符串之间的转换虽然很方便，但是还是觉得每次都去new ObjectMapper麻烦。这个时候就产生了我们自己的期望的业务处理接口。 
 
-	public interface DataTransform<T>{
-		public T jsonToObject(String jsonData);
-    		public String objectToJson(T obj);
+	public interface DataTransform{
+		public <T> T fromStringToObject(String json, Class<T> modelClass)
+    		public <T> String fromObjectToString(T domain)
 	}  
   
 具体实现类：
   
-	public class  JacksonProxy<T> implements DataTransform<T>{
-    		private ObjectMapper objectMapper = new ObjectMapper();//被代理对象
-    		public T jsonToObject(String jsonData){
-		       //使用Jackson object mapper具体实现 writeValueAsString
+	public class  JacksonProxy implements DataTransform{
+    		private ObjectMapper mapper = new ObjectMapper();//被代理对象
+    		public T jsonToObject(String jsonData,Class<T> modelClass){
+		       //使用Jackson object mapper具体实现 readValue
+		        model = this.mapper.readValue(json, modelClass);
     		}
     		public String objectToJson(T obj)｛
        		   //使用Jackson object mapper具体实现  readValue
+       		   OutputStream out  = new OutputStream();
+       		   this.mapper.writeValue( out, obj); 
     		｝
 	}
    
 /**RESTful**/常用底层框架Jersey  
-
-	/**restful同时实现client resource和 server resource**/ 
-	public interface ClientResource<T>{ //T为rest data transform object.
-	    public T get(int id){
-
-	    }
-	    public boolen update(int id,String obj){
-
-        }
-    	....//delete,getall
-	}
-
-	public class ClientResource implements ClientResource<T>{
-		private RESTServiceProxy<T> proxy;
+	public class ClientResource {
+	private RESTServiceProxy proxy;
     	public T get(id){
       	    //service 建立service之间的连接，构建path.和请求方式GET
-		    getProxy(class,path).get(id);
+      	    if(prox == null){
+      	    	 proxy = new RESTServiceProxy(class,path);
+      	    }
+      	    proxy.get(id);
+		   
     	}
 
-    	private RESTServiceProxy<T> getProxy(Class clazz, Path path){
-        	 proxy = new RESTServiceProxy<T>(clazz, path);
-    	}
 	}  
-
+	
+	public class RESTServiceProxy{
+		//Create client. webResource
+	}
+	
     server端
 
-	public   class ServerResource implements ClientResource<T>{
+	public   class ServerResource{
 		@GET
 		@Path("{id}")
 		public Response get(@Context HttpHeaders httpheader, @PathParam("id") String id)
-			process(id,"TYPE.GET");
-      			return obj;
+		{
+      			return process("TYPE.GET",id);
     		}
-        //相当于一个分配器统一处理各种类型（GET,POST,PUT,DELETE,HEADER）的请求
-		public void  process(params,type){
-		    if(type == "TYPE.GET"){
-        		get(key);
-            }else if(type == "TYPE.PUT"){//当然用switch也可以把执行TYPE弄成枚举
-
-        	}
-    	}
-    
-    	public T get(String key){//用于子类实现
-
-    	}
+     
+		//相当于一个分配器统一处理各种类型（GET,POST,PUT,DELETE,HEADER）的请求
+    		public T process(String methodName,Param param){
+			//start log
+			//利用反射实现,对具体实现进行解耦,methodName用于子类实现
+			executeMethod(this,methodName,param);
+			//end log
+    		}
 	}
 
 
 /**SOAP**/    
-实现对PortType代理服务器端，当然客服端也可以实现wsimport生成的client代码进行代理。用JAXB进行XML String到  
-Object的转换，String是因为网络传输没用序列化，是传输XML的String，这样方便验证。
-
+实现对PortType代理服务器端，当然客服端也可以实现对wsimport生成的client代码进行代理。  
+    
     @WebService(name = "PortType", targetNamespace = "edu.one")
     @HandlerChain(file = "PortType_handler.xml")
     public interface PortType{
@@ -113,7 +104,7 @@ Object的转换，String是因为网络传输没用序列化，是传输XML的St
 
 /**TibCOEMS**/  
 
-EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker（异步Message Consumer）就是发布者和订阅者之间的关系。这个一样可以封装对初始话JNDI context的管理，destention 目录书的查找管理。发送消息（sender）主要就这几部，可以看到可变的是destName，messageText。自己可以想到业务抽象。  
+EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker（异步Message Consumer）就是发布者和订阅者之间的关系。这个一样可以封装对初始话JNDI context的管理，destention 目录书的查找管理。发送消息（sender）主要就这几部，可以看到可变的是destName，messageText。    
 
     conn = createConnection();
     session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -125,12 +116,11 @@ EMS server在整个SOA架构中器中心枢纽作用。sender和receiver/borker�
     sender.send(textMsg);
 
 由于Broker是像配置servlet一样会调用broker的execute.而receiver跟sender差不多都是手动建立连接拿数据，而且需要自己建
-立线程来接受消息，相当于我们主动去拿消息。 broker的execute实际触发是在MessageListener对onMessage的回调时候执行，相当
-于服务器推送，不是我们去拿数据，而是服务器自己发送到comsumer. 可能是向java socket中注册相应操作的回调.
+立线程来接受消息处理（主要是可能处理过程较长）。broker的execute实际触发是在selector用while循环对onMessage的回调时候执行。这个在socket异步编程中可见。  
 
 
 /**JPA**/  
-可以对unitEntityManger的代理。这个就不写了，基本一样。实际干事的还是JPA的实现框架（EclipseLink,Hibernate）。
+可以对unitEntityManger的代理。这个就不写了，基本一样。实际处理数据逻辑还是JPA的实现框架（EclipseLink,Hibernate）。
 
 
 
