@@ -36,6 +36,7 @@ webservice传输,NoSQL 聚集（key-value）的时候都可能会用，传输数
 	}
    
 /**RESTful**/常用底层框架Jersey  
+
 	public class ClientResource {
 	private RESTServiceProxy proxy;
     	public T get(id){
