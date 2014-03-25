@@ -36,42 +36,47 @@ webservice传输,NoSQL 聚集（key-value）的时候都可能会用，传输数
 	}
    
 /**RESTful**/常用底层框架Jersey  
-
-	public class ClientResource {
-	private RESTServiceProxy proxy;
-    	public T get(id){
-      	    //service 建立service之间的连接，构建path.和请求方式GET
-      	    if(prox == null){
-      	    	 proxy = new RESTServiceProxy(class,path);
-      	    }
-      	    proxy.get(id);
-		   
-    	}
-
-	}  
 	
-	public class RESTServiceProxy{
-		//Create client. webResource
-	}
-	
+    public abstract class ClientResource<T> {
+    private Class<T> clazz;//子类className
+    private RESTServiceProxy proxy;
+      protected FWRESTServiceProxy<T> getProxy() throws FWProxyException {
+        if (proxy == null) {  
+                proxy = new FWRESTServiceProxy<T>(this.clazz);
+        }
+    
+        return proxy;
+      }
+        public T get(id){
+            //service 建立service之间的连接，构建path.和请求方式GET
+            getProxy().get(id);
+        }
+    }  
+    
+    public class RESTServiceProxy{
+        //Create client. webResource
+    }
+    
     server端
-
-	public   class ServerResource{
-		@GET
-		@Path("{id}")
-		public Response get(@Context HttpHeaders httpheader, @PathParam("id") String id)
-		{
-      			return process("TYPE.GET",id);
-    		}
-     
-		//相当于一个分配器统一处理各种类型（GET,POST,PUT,DELETE,HEADER）的请求
-    		public T process(String methodName,Param param){
-			//start log
-			//利用反射实现,对具体实现进行解耦,methodName用于子类实现
-			executeMethod(this,methodName,param);
-			//end log
-    		}
-	}
+    
+    public abstract class ServerResource<T>{
+        @GET
+        @Path("{id}")
+        @Produces({"application/xml", "text/xml"}) //response mime type
+        @Consumes({"application/json", "application/xml", "text/xml"})//client send mime type
+        public Response get(@Context HttpHeaders httpheader, @PathParam("id") String id)
+        {
+                return process("TYPE.GET",id);
+        }
+    
+        //相当于一个分配器统一处理各种类型（GET,POST,PUT,DELETE,HEADER）的请求
+        public T process(String methodName,Param param){
+        //start log
+        //利用反射实现,对具体实现进行解耦,methodName用于子类实现
+        executeMethod(this,methodName,param);//调用子类具体实现
+        //end log
+        }
+    }
 
 
 /**SOAP**/    
