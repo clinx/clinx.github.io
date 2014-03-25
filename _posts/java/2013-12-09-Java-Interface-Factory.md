@@ -38,7 +38,7 @@ webservice传输,NoSQL 聚集（key-value）的时候都可能会用，传输数
 /**RESTful**/常用底层框架Jersey  
 	
     public abstract class ClientResource<T> {
-    private Class<T> clazz;//子类className
+    private Class<T> clazz;//用于查找配置信息中的路径。
     private RESTServiceProxy proxy;
       protected FWRESTServiceProxy<T> getProxy() throws FWProxyException {
         if (proxy == null) {  
